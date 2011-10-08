@@ -1,0 +1,13 @@
+//things I am cutting out of Tumblr Theme
+
+<div class="description">
+	{block:Twitter}<br><br>
+    <span style="float: left; margin: 0 7px 0 0"><a href="http://www.twitter.com/{TwitterUsername}">twitter.com/{TwitterUsername}</a>:</span>
+    <ul id="twitter_update_list"></ul>{/block:Twitter}<form id="search" action="/search" method="get" name="search">
+    	<input class="text" type="text" name="q" value="{SearchQuery}"> <input class="button" type="submit" value="{lang:Search}">
+    	</form>{block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled} {block:SubmissionsEnabled}<a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}  {Description} 
+	<form id="search" action="/search" method="get" name="search">
+	<input class="text" type="text" name="q" value="{SearchQuery}"> <input class="button" type="submit" value="Search">
+	</form>
+	</div>
+</div>
