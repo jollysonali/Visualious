@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<!--
+		Designed by Peter V. 
+		"Astronaut"
+		Found at Tumblr's theme garden.
+		http://www.tumblr.com/theme/3531
+	-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>
+			{Title}{block:SearchPage} ({lang:Search results for SearchQuery}){/block:SearchPage}{block:PostSummary} ({PostSummary}){/block:PostSummary}
+		</title>
+		<meta name="description" content="{block:IndexPage}{block:Description}{MetaDescription}{/block:Description}{/block:IndexPage}{block:PermalinkPage}{PostSummary}{/block:PermalinkPage}">
+		<meta name="author" content="Peter Vidani">
+		<link rel="shortcut icon" href="{Favicon}">
+		<link rel="alternate" type="application/rss+xml" href="{RSS}">
+		<link rel="stylesheet" href="http://static.tumblr.com/thpaaos/DIcklyl4z/reset.css" type="text/css">
+		<link rel="stylesheet" href="http://dl.dropbox.com/u/16184560/style.css" type="text/css">
+		<!-- ### Custom Stuff ### -->
+		<meta name="color:Title" content="#AAAAAA">
+		<meta name="color:Text" content="#CCCCCC">
+		<meta name="color:Links" content="#FF3B8E">
+		<meta name="color:Links Hover" content="#FFFFFF">
+		<meta name="color:Links In Notes" content="#AAAAAA">
+		<meta name="color:Links Background In Pagination" content="#FFFF00">
+		<meta name="color:Link Post" content="#FFC000">
+		<meta name="color:Timestamp" content="#FF0000">
+		<meta name="font:Body" content="Helvetica Neue">
+		<meta name="if:Show portrait bubble" content="1">
+		<meta name="if:Show notes on permalink pages" content="1">
+		<meta name="image:Header" content="">
+		<meta name="text:Disqus Shortname" content="">
+		<style type="text/css">
+<p>
+	{ block: PermalinkPage } #disqus_thread { width: 365px; font-size: 11px; background: #f7f7f7; margin: 31px auto 0 auto; padding: 10px; float: right; } #disqus_thread a { color: { color: Links In Notes } ; } { block: IfDisqusShortname } ol.notes { width: 385px; float: left; } {/block:IfDisqusShortname } {/block:PermalinkPage } { block: SearchPage } iframe#tumblr_controls { top: 39px !important; } a.install { top: 65px; } {/block:SearchPage } { block: TagPage } iframe#tumblr_controls { top: 39px !important; } a.install { top: 65px; } {/block:TagPage } }
+</p>
+
+
+
+{Custom CSS} 
+                {}
+</style>
+
+
+<!-- MY JAVASCRIPT! -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script src="http://static.tumblr.com/thpaaos/Oznkoyc5z/jquery.scale.js"></script>
+<script src="http://dl.dropbox.com/u/16184560/desandro-masonry-4196062%202/jquery.masonry.js"></script>
+             
+             <script type="text/javascript">
+                   {block:IndexPage}
+                              (function($) {
+				$(window).load(function () {
+                                    var $allposts = $('#allposts');
+                                     $allposts.masonry({itemSelector: '.box', columnWidth: 100, isAnimated: true});
+                                       });
+                            })(jQuery);
+                   {/block:IndexPage}
+               </script>
+<script type="text/javascript">
+               jQuery.getJSON('http://api.tumblr.com/v2/blog/savesafe.tumblr.com/posts?api_key=5KShzHfHnwPMFxIsEDbdYgYsqIHeSENb7hJug8Mct6hVjguEMW&jsonp=?',
+               function(data) {
+               
+                   var $elem;
+                   $elem = $(".tag_list").first();
+               
+                   $.each(data.response.posts, function(idx, post) {
+                       $.each(post.tags, function(idx, tag) {
+                           if ($elem.find('a[href="/tagged/' + tag + '"]').length == 0) {
+                               $elem.append(
+                                   $('<li />').append(
+                                       $('<a />')
+                                           .attr('href', '/tagged/' + tag)
+                                           .text(tag)
+                                   )
+                               );
+                           }
+                       });
+                   });
+               });
+               
+</script>
+</head>
+
+<body>	    
+	<div id="container">
+	     <div class="header">
+		    <a href="/">{block:IfHeaderImage}<img src="{image:Header}" class="logo">{/block:IfHeaderImage} {block:IfNotHeaderImage}</a>
+		    <h1><a href="/">{Title}</a></h1>
+                <a href="/">{/block:IfNotHeaderImage}</a>
+<div class="tag_cloud">
+    <ul class="tag_list">
+    </ul>
+</div>
+{block:HasPages} 
+    {block:Pages}<a href="{URL}">{Label}</a>{/block:Pages}<br>
+{/block:HasPages}
+
+
+
+	<div class="posts" id="allposts">
+		{block:Posts}
+			<div class="box">					
+                           {block:Photo}{block:IndexPage}<a href="{Permalink}">{/block:IndexPage} {block:PermalinkPage}{LinkOpenTag}{/block:PermalinkPage} <img src="{block:IndexPage}{PhotoURL-250}{/block:IndexPage}{block:PermalinkPage}{PhotoURL-HighRes}{/block:PermalinkPage}" alt="{PhotoAlt}"> {block:IndexPage}</a>{/block:IndexPage} {block:PermalinkPage}{LinkCloseTag}{/block:PermalinkPage} {/block:Photo} {block:Audio}
+					<div class="audio">
+						{AudioPlayerWhite}
+					</div>{/block:Audio} {block:Video} {block:IndexPage}{Video-250}{/block:IndexPage} {block:PermalinkPage}{Video-500}{/block:PermalinkPage} {/block:Video} {block:Text} {block:Title}<a href="{Permalink}" class="title">{Title}</a>{/block:Title}
+					<div class="caption">
+						{Body} {block:More} <a href="{Permalink}" class="readMore">{lang:Read more}</a> {/block:More}
+					</div>{/block:Text} {block:Answer} <b>{lang:Asker asked}:&nbsp;</b>{Question}
+					<p>
+						<br>
+						<b>{lang:Answer}:</b>{Answer}
+					</p>{/block:Answer} {block:Link} <a href="{URL}" class="title link">{Name} →</a> {/block:Link} {block:Quote}
+					<div class="title">
+						"{Quote}"
+					</div>{/block:Quote} {block:Chat} {block:Title}
+					<h2>
+						<a href="{Permalink}" class="title">{Title}</a>
+					</h2>{block:Title} {block:Lines} {block:Label}{block:Label}{/block:Lines}
+					<table class="chat" cellspacing="0">
+						<tr>
+							<td class="name line{UserNumber}">
+								{Label}
+							</td>
+							<td class="words line{UserNumber}">
+								{Line}
+							</td>
+						</tr>
+					</table>{/block:Chat} {block:Photo}{block:Caption}
+					<div class="caption">
+						{Caption}
+					</div>{/block:Caption}{/block:Photo} {block:Audio}{block:Caption}
+					<div class="caption">
+						{Caption}
+					</div>{/block:Caption}{/block:Audio} {block:Video}{block:Caption}
+					<div class="caption">
+						{Caption}
+					</div>{/block:Caption}{/block:Video} {block:Link}{block:Description}
+	<div class="caption">
+        {Description}
+    </div>{/block:Description}
+
+
+
+{/block:Link} {block:Quote}{block:Source}
+					<div class="caption">
+						{Source}
+					</div>{/block:Source}{/block:Quote}
+					<div>
+						<a href="{Permalink}" class="timestamp">—{block:Date} {lang:TimeAgo with NoteCount notes}</a>
+					</div>{block:Date} {block:IfDisqusShortname} <span class="timestamp">— <a href="{Permalink}#disqus_thread" class="timestamp"></a></span><br>
+					{block:IfDisqusShortname} {/block:Date}  {block:Tags} <a href="{TagURL}" class="tag"><span class="pound">#</span>{Tag}</a>&nbsp; {/block:Tags}{block:PermalinkPage} {block:IfDisqusShortname}
+					<div style="overflow: hidden">
+						<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/{text:Disqus%20Shortname}/embed.js">
+</script> <noscript><a href="http://{text:Disqus%20Shortname}.disqus.com/?url=ref">{lang:View the discussion thread}</a></noscript> {/block:Date} {/block:IfDisqusShortname} {block:IfShowNotesOnPermalinkPages} {block:PostNotes}{PostNotes}{/block:PostNotes} {/block:IfShowNotesOnPermalinkPages} {block:IfDisqusShortname}
+					</div>{/block:IfDisqusShortname}
+					<div class="columnHolder footer" style="margin: 31px 0;">
+						<div class="column navigation" id="navigation">
+							{block:Pagination} {block:PreviousPage}<a href="{PreviousPage}" class="navigate">{/block:PreviousPage}{lang:Previous}{block:PreviousPage}</a>{/block:PreviousPage} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {block:NextPage}<a href="{NextPage}" class="navigate" id="nextPage" name="nextPage">{/block:NextPage}{lang:Next} →{block:NextPage}</a>{/block:NextPage} {/block:Pagination} {block:PermalinkPagination} {block:NextPost}<a href="{NextPost}" class="navigate">{/block:NextPost}{lang:Previous}{block:NextPost}</a>{/block:NextPost} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {block:PreviousPost}<a href="{PreviousPost}" class="navigate">{/block:PreviousPost}{lang:Next} →{block:PreviousPost}</a>{/block:PreviousPost} {/block:PermalinkPagination}
+						</div><!-- .column.navigation -->
+						<div class="column middle">
+							<a href="{RSS}">{lang:RSS}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/archive">{lang:Archive}</a> / <a href="/random">{lang:Random}</a>
+						</div><!-- .column.middle -->
+						<div class="column">
+							<a href="http://www.tumblr.com/theme/3531">Astronaut</a> <span font-size: 12px>by</span> <a href="http://petervidani.com">Peter Vidani</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.tumblr.com">Tumblr</a>
+						</div><!-- .column -->
+					</div><!-- #footer -->
+					{/block:PermalinkPage}
+				</div><!-- .box -->
+				{/block:Posts}
+			</div><!-- .posts -->
+			<div style="clear: both;"></div>{block:IndexPage}
+			<div class="columnHolder footer">
+				<div class="column navigation" id="navigation">
+					{block:Pagination} {block:PreviousPage}<a href="{PreviousPage}" class="navigate">{/block:PreviousPage}{lang:Previous}{block:PreviousPage}</a>{/block:PreviousPage} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {block:NextPage}<a href="{NextPage}" class="navigate" id="nextPage" name="nextPage">{/block:NextPage}{lang:Next} →{block:NextPage}</a>{/block:NextPage} {/block:Pagination} {block:PermalinkPagination} {block:NextPost}<a href="{NextPost}" class="navigate">{/block:NextPost}{lang:Previous}{block:NextPost}</a>{/block:NextPost} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {block:PreviousPost}<a href="{PreviousPost}" class="navigate">{/block:PreviousPost}{lang:Next} →{block:PreviousPost}</a>{/block:PreviousPost} {/block:PermalinkPagination}
+				</div><!-- .column.navigation -->
+				<div class="column middle">
+					<a href="{RSS}">{lang:RSS}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/archive">{lang:Archive}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/random">{lang:Random}</a>
+				</div><!-- .column.middle -->
+				<div class="column">
+					<a href="http://www.tumblr.com/theme/3531">Astronaut</a> by <a href="http://petervidani.com">Peter Vidani</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.tumblr.com">Tumblr</a>
+				</div><!-- .column -->
+			</div><!-- #footer -->
+			{/block:IndexPage}
+		</div><!-- #container -->
+		<p>
+			{block:Twitter}
+		</p><script src="http://static.tumblr.com/thpaaos/ZCdkl306g/twitter.js" type="text/javascript">
+</script><script src="http://twitter.com/statuses/user_timeline/{TwitterUsername}.json?callback=twitterCallback2&amp;count=1" type="text/javascript">
+</script>
+		<p>
+			{/block:Twitter} {block:IfDisqusShortname}
+		</p><script type="text/javascript">
+//<![CDATA[
+		(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+		if(links[i].href.indexOf('#disqus_thread') >= 0) {
+			query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+		}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/{text:Disqus Shortname}/get_num_replies.js' + query + '"></' + 'script>');
+		})();
+		//]]>
+		<\/script>
+		{/block:IfDisqusShortname}
+
+
+
+	</body>
+</html>
