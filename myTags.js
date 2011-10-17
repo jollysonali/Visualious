@@ -18,3 +18,15 @@ function(data) {
         });
     });
 });
+
+
+
+
+$(window).load(function () {
+   var $allposts = $('#fooallposts');
+       $allposts.masonry({
+           itemSelector: '.box', 
+           columnWidth: 100, 
+           isAnimated: true
+           });
+   });

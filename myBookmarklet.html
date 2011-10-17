@@ -1,0 +1,360 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="x-dns-prefetch-control" content="off"/>
+        <title>Share on Tumblr</title>
+        
+        <link rel="icon" href="http://assets.tumblr.com/images/favicon.gif?2" type="image/gif"/>
+        
+        <script type="text/javascript" language="javascript"
+        src="http://assets.tumblr.com/languages/strings/en_US.js?656"></script>
+        
+        <script type="text/javascript" language="javascript"
+        src="http://assets.tumblr.com/javascript/prototype.js?656"></script>
+        
+        <script type="text/javascript" language="javascript">var assets_url = 'http://assets.tumblr.com'</script>
+        
+        <script type="text/javascript" language="javascript"
+        src="http://assets.tumblr.com/javascript/editor.js?656"></script>
+        
+        <script type="text/javascript" language="javascript"
+        src="http://assets.tumblr.com/javascript/tiny_mce_3_3_3/tiny_mce.js?656"></script>
+        
+        <link rel="stylesheet" type="text/css"
+        href="http://assets.tumblr.com/stylesheets/compressed/editor.css?656"/>
+        
+        <link rel="stylesheet" type="text/css"
+        href="http://assets.tumblr.com/stylesheets/compressed/bookmarklet.css?656"/>
+        
+                
+        <script type="text/javascript">
+                            // Chrome subtracts its 50px tall toolbar from the window's height [430 + 50 = 480]
+                Event.observe(window, 'load', function(){
+                    resizeTo(450, 480);
+                });
+                        
+            var active_form = 'link';
+            var post_types = ["regular","photo","quote","link","chat","video"];
+            
+            function activate_nav_tab(id) {
+                active_form = id;
+                
+                $$('#navigation li').each(function(el){
+                    el.removeClassName('active');
+                });
+                
+                $('nav_' + id).addClassName('active');
+                
+                $$('form').each(function(el){
+                    Element.hide(el);
+                });
+                
+                Element.hide('set_photo_clickthrough_link');
+                if (id == 'photo') Element.show('set_photo_clickthrough_link');
+                                                
+                Element.show(id + '_form');
+                
+                return false;
+            }
+            
+            var hide_source_url_tooltip_timeout;
+            
+            function show_source_url_tooltip(type) {
+                if ($('source_url_tooltip_' + type).visible()) {
+                    $('source_url_tooltip_' + type).hide();
+                    window.clearTimeout(hide_source_url_tooltip_timeout);
+                    return false;
+                }
+                
+                $$('.source_url_tooltip').invoke('hide');
+                $('source_url_tooltip_' + type).show();
+                
+                window.clearTimeout(hide_source_url_tooltip_timeout);
+                hide_source_url_tooltip_timeout = (function(){
+                    $$('.source_url_tooltip').invoke('hide');
+                }).delay(4);
+            }
+            
+            function show_source_prompt(type, select) {
+                $('source_url_confirm_' + type).hide();
+                $('source_url_prompt_' + type).show();
+                
+                if (select) $('source_url_' + type).select();
+            }
+            
+            function sync_input_values(id_suffix, master) {
+                if ($(id_suffix)) $(id_suffix).value = master;
+                
+                post_types.each(function(type){
+                    if ($(type + id_suffix)) $(type + id_suffix).value = master; 
+                });
+            }
+            
+            function update_share_navigation_current_blog_title(list) {
+                var index = list.options[list.selectedIndex];
+                if (! index.hasAttribute('data-blog-url')) return;
+                
+                if ($('share_navigation_current_blog_title')) {
+                    $('share_navigation_current_blog_title').innerHTML = index.getAttribute('data-blog-url');
+                }
+            }
+            
+            function has_twitter(tumblelog_name) {
+                                
+                var tumblelogs_with_twitter = [];
+                
+                for (var i = 0, length = tumblelogs_with_twitter.length; i < length; i++) {
+                    if (tumblelogs_with_twitter[i] == tumblelog_name) return true;
+                }
+                
+                return false;
+            }
+            
+            function has_send_to_twitter(tumblelog_name) {
+                                
+                var tumblelogs_with_twitter = [];
+                
+                for (var i = 0, length = tumblelogs_with_twitter.length; i < length; i++) {
+                    if (tumblelogs_with_twitter[i] == tumblelog_name) return true;
+                }
+                
+                return false;
+            }
+            
+            function update_send_to_twitter(list) {
+                var tumblelog_name = list.options[list.selectedIndex];
+                tumblelog_name = tumblelog_name.value;
+                
+                if (has_twitter(tumblelog_name)) {
+                    $('send_to_twitter_wrapper').show();
+                    $('send_to_twitter').checked = (has_send_to_twitter(tumblelog_name) ? true : false);
+                } else {
+                    $('send_to_twitter_wrapper').hide();
+                    $('send_to_twitter').checked = false;
+                }
+                
+                sync_input_values('_form_send_to_twitter', $('send_to_twitter').checked ? 1 : 0);
+            }
+        </script>
+        
+                
+                
+        
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-97144-8']);
+        _gaq.push(['_trackPageview']);
+        
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    </head>
+    <body id="bookmarklet_index">
+        <div id="post_forms">
+              <ul id="navigation">
+                   <li id="nav_photo">
+                         <a href="#"
+                             onclick="this.blur(); return activate_nav_tab('photo');">Photo</a>
+                     </li>
+               </ul>
+                        
+	<div id="container">
+                               
+                   <!-- Regular -->
+                   <!-- Photo -->
+            <form action="/share" method="post" id="photo_form"
+                        style="display:none;">
+                                                                                <input type="hidden" name="s" value=""/>
+                    <input type="hidden" name="t" value=""/>
+                    <input type="hidden" name="u" value=""/>
+                    <input type="hidden" name="v" value=""/>
+
+                    <input type="hidden" name="source" value="bookmarklet"/>
+                    <input type="hidden" id="form_key" name="form_key" value="wty1WINBWJ4SaM7sn1u9NiqkryY"/>
+                    <input type="hidden" id="photo_form_channel_id" name="channel_id" value="0"/>
+                    <input type="hidden" id="photo_form_send_to_twitter" name="send_to_twitter" value="1"/>
+                    <input type="hidden" id="photo_form_post_state" name="post[state]" value="0"/>
+                    <input type="hidden" id="photo_form_post_date" name="post[date]" value="now"/>
+                    <input type="hidden" id="photo_form_post_slug" name="post[slug]"/>
+                    <input type="hidden" id="photo_form_post_tags" name="post[tags]" value=""/>
+                    <input type="hidden" name="post[type]" value="photo"/>
+                    
+                                                                    
+                                <input type="hidden" name="post[three]" id="photo_form_clickthrough"
+                                value=""/>
+                                
+                                                                    <h2>Caption <span class="optional">(optional)</span></h2>
+                                    
+                                    <textarea name="post[two]" id="photo_post_two"
+                                    style="height:183px;"> </textarea>
+                                    
+                                    <h2>Photo URL</h2>
+                                    
+                                    <input name="external_urls[0]" id="photo_src" class="text" onkeydown="pick(0);"/>
+                                    
+                                                                                                    
+                                                                        
+                    <div class="source_url_wrapper">
+                        <label class="source_url_confirm" id="source_url_confirm_photo" for="source_url_confirm_checkbox_photo">
+                                                            <input type="checkbox" checked="checked" id="source_url_confirm_checkbox_photo" onchange="show_source_prompt('photo', true)" />
+                                                        
+                            <strong></strong> photographed or created this image                            <a href="#" onclick="show_source_url_tooltip('photo'); return false;" class="source_url_questionmark"></a>
+                        </label>
+                        <div class="source_url_prompt" id="source_url_prompt_photo" style="display:none;">
+                            <input type="text" name="post[source_url]" value="" class="text" id="source_url_photo" />
+                            <label for="source_url_photo">optional link to source<a href="#" onclick="show_source_url_tooltip('photo'); return false;" class="source_url_questionmark"></a></label>
+                        </div>
+                                                    <script type="text/javascript">
+                                show_source_prompt('photo', false);
+                            </script>
+                                                <div class="source_url_tooltip" id="source_url_tooltip_photo" style="display:none;">This will automatically set the "source" of this post</div>
+                    </div>
+                                                
+                                <input type="hidden" id="photo_post_two_is_rich_text"
+                                name="is_rich_text[two]" value="0"/>
+
+								<div class="divider"></div>
+
+				                <label class="option_label">Tag this post</label>
+
+				                <div class="option" style="height:auto; padding:10px 0px;">
+				                    <textarea type="text" id="post_tags" name="post[tags]"
+				                    style="height:60px;"
+				                    class="text_input" onchange="
+				                        sync_input_values('_form_post_tags', this.value);
+				                    "></textarea>
+				                </div>
+                                                    </form>
+                                                    
+                                    <!-- Quote -->
+                             
+                                    <!-- Link -->
+                
+                                    <!-- Chat -->
+                    
+                                    <!-- Video -->
+                    
+                                     <!-- Misc embed code -->
+                          <!-- ADVANCED BAR -->  
+
+				                <div id="advanced_bar">
+				                    <a href="#" onclick="Element.hide('post_forms'); Element.show('advanced'); return false;" id="advanced_tab">Advanced</a>
+				                </div>
+				            </div>
+				        </div>
+
+				        <div id="advanced" style="display:none;">
+				            <div id="advanced_bar" class="close_advanced_tab">
+				                <a href="#" onclick="Element.show('post_forms'); Element.hide('advanced'); return false;" id="advanced_tab">Advanced</a>
+				            </div>
+
+				            <div style="width:410px; margin:50px auto 0px auto;">
+				                <div class="divider"></div>
+
+				                <label class="option_label">Publishing options</label>
+
+				                <div class="option">
+				                    <select id="post_state" name="post[state]" class="select_menu" onchange="
+				                        sync_input_values('_form_post_state', $('post_state').value);
+				                    ">
+				                        <option value="0" selected="selected">publish now</option>
+				                        <option value="2">add to queue</option>
+				                        <option value="1">save as draft</option>
+				                        <option value="private">private</option>                                    
+				                    </select>&nbsp;
+				                </div>
+
+				                <div id="set_photo_clickthrough_link" style="display:none;">
+				                    <div class="divider"></div>
+
+				                    <label class="option_label">Set a click-through link</label>
+
+				                    <div class="option">
+				                        <input type="text" name="post[three]" class="text_input"
+				                        onchange="$('photo_form_clickthrough').value = this.value;"
+				                        value=""/>&nbsp;
+				                    </div>
+				                </div>                
+
+				                <div class="divider"></div>
+
+				                <label class="option_label">Date this post</label>
+
+				                <div class="option">
+				                    <input type="text" id="post_date" name="post[date]"
+				                    class="text_input" value="now" onchange="
+				                        sync_input_values('_form_post_date', $('post_date').value);
+				                    "/>&nbsp;
+				                </div>
+
+				                <div class="divider"></div>
+
+				                <label class="option_label">Tag this post</label>
+
+				                <div class="option" style="height:auto; padding:10px 0px;">
+				                    <textarea type="text" id="post_tags" name="post[tags]"
+				                    style="height:60px;"
+				                    class="text_input" onchange="
+				                        sync_input_values('_form_post_tags', this.value);
+				                    "></textarea>
+				                </div>
+
+				                <div class="divider"></div>
+
+				                <label class="option_label" id="option_label_custom_url">Set a custom post URL</label>
+
+				                <div class="option" style="font-size:11px; line-height:45px;">
+				                    /post/123456/<input type="text" style="background-color:transparent;
+				                    border-width:0px; border-bottom:solid 1px #bbb; width:100px;
+				                    color:#aaa; padding:0px; font:normal 11px 'Lucida Grande',Verdana;
+				                    outline:none;" id="post_slug" onchange="
+				                        this.value = this.value.toLowerCase().replace(&quot;'&quot;, '').replace(/[^-a-z0-9]/g, '-').replace(/--+/g, '-').replace(/^-+|-+$/g, '');
+				                        sync_input_values('_form_post_slug', $('post_slug').value);
+				                    "/>
+				                </div>
+
+				                <div class="divider"></div>
+
+				                <span id="send_to_twitter_wrapper" style="display:none">
+				                    <label class="option_label" for="send_to_twitter">Twitter</label>
+
+				                    <div class="option">
+				                        <input type="checkbox" style="margin:0px 3px 0px 0px;" 
+				                        id="send_to_twitter" name="send_to_twitter"
+				                        checked="checked"                        onchange="
+				                            sync_input_values('_form_send_to_twitter', $('send_to_twitter').checked ? 1 : 0);
+				                        "/>
+				                        <label for="send_to_twitter">Send to Twitter</label>
+				                    </div>
+
+				                    <div class="divider"></div>
+				                </span>
+				            </div>
+				        </div>                          
+
+        
+        <div id="post_controls">
+                        
+                        
+                            <input type="submit" value="Create post" onclick="if (this.value == 'Saving...') return false;this.value = 'Saving...';$(active_form + '_form').submit();"/> in <select name="channel_id" id="channel_id" style="width:150px; margin-left:4px;" onchange="update_send_to_twitter(this);sync_input_values('_form_channel_id', $('channel_id').value);"><option value="savesafe" data-blog-url="savesafe.tumblr.com">SAVE / SAFE</option></select>                    </div>
+		<script type="text/javascript">         
+            render_editor('photo_post_two',   'rich', 1);       
+        </script>
+ 
+    <script type="text/javascript">
+        _qoptions = { qacct: 'p-19UtqE8ngoZbM' };
+    </script>
+    <script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-19UtqE8ngoZbM.gif"
+        style="display:none; border-width:0px; height:1px; width:1px;"/>
+    </noscript>
+    </body>
+</html>
