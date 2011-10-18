@@ -18,5 +18,3 @@ function(data) {
         });
     });
 });
-
-$(".foo").each()
